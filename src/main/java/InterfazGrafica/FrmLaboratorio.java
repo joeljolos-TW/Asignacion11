@@ -47,10 +47,10 @@ public final class FrmLaboratorio extends JFrame {
     }
     
     private void setupWindow() {
-        setSize(800, 600); // Tamaño más adecuado
+        setSize(600, 450); 
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH); // Opcional: maximizar ventana
+        
     }
     
     private void setupMenu() {
@@ -60,6 +60,7 @@ public final class FrmLaboratorio extends JFrame {
         opcionAgregar.addActionListener(e -> mostrarDialogoAgregar());
         opcionAcercaDe.addActionListener(e -> mostrarAcercaDe());
         opcionInventariar.addActionListener(e -> mostrarInventariar());
+        opcionDesinventariar.addActionListener(e-> mostrarDesinventariar());
         
         // Construir estructura de menús
         subMenuProductos.add(opcionAgregar);
@@ -115,6 +116,10 @@ public final class FrmLaboratorio extends JFrame {
     
     private void mostrarInventariar(){
         DlgReactivo dlg = new DlgReactivo(this,'i');
+        dlg.setVisible(true);
+    }
+    private void mostrarDesinventariar(){
+        DlgReactivo dlg = new DlgReactivo(this,'d');
         dlg.setVisible(true);
     }
 }

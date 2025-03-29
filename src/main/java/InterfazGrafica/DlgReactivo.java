@@ -39,18 +39,14 @@ public class DlgReactivo extends JDialog {
     // Constructor mejorado
     public DlgReactivo(JFrame parent, char opcion) {
 
-        if (opcion == 'i') {
-            //super(parent, "Inventariar", true);
-            initComponents();
-            setupLayout();
-            setupListeners();
-            pack();
-            setLocationRelativeTo(parent);
-        } else if (opcion == 'd') {
-            //super(parent, "Desinventariar",true);
-        }
+        super(parent, (opcion == 'i' ? "Inventariar Reactivo" : "Desinventariar Reactivo"), true);
 
-        
+        initComponents();
+        setupLayout();
+        setupListeners(opcion);
+        pack();
+        setLocationRelativeTo(parent);
+
     }
 
     private void initComponents() {
@@ -107,14 +103,24 @@ public class DlgReactivo extends JDialog {
         getContentPane().add(mainPanel);
     }
 
-    private void setupListeners() {
-        // Acción para el botón Aceptar
-        btnAceptar.addActionListener(e -> {
-            if (vd.validaDescripcionReactivo(getDescripcion())
-                    && vd.validaCantidadReactivo(String.valueOf(getCantidad()))) {
-                dispose(); // Cierra el diálogo si los datos son válidos
-            }
-        });
+    private void setupListeners(char opcion) {
+
+        if (opcion == 'i') {
+            // Acción para el botón Aceptar
+            btnAceptar.addActionListener(e -> {
+                if (vd.validaDescripcionReactivo(getDescripcion())
+                        && vd.validaCantidadReactivo(String.valueOf(getCantidad()))) {
+                    dispose(); // Cierra el diálogo si los datos son válidos
+                }
+            });
+        } else if (opcion == 'd') {
+            btnAceptar.addActionListener(e -> {
+                if(vd.validaDescripcionReactivo(getDescripcion())
+                        && vd.validaCantidadReactivo(String.valueOf(getCantidad()))){
+                    dispose();
+                }
+            });
+        }
 
         // Acción para el botón Restaurar
         btnRestaurar.addActionListener(e -> {
@@ -125,6 +131,7 @@ public class DlgReactivo extends JDialog {
 
         // Acción para el botón Cancelar
         btnCancelar.addActionListener(e -> dispose());
+
     }
 
     private boolean validarDatos() {

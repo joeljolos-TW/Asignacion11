@@ -9,13 +9,14 @@ import Validadores.Validadores;
  * @author joel_
  */
 public class Reactivo {
-    private String descripcion,cantidad;
+    private String descripcion;
+    private double cantidad;
     private Validadores vd;
 
     public Reactivo() {
     }
 
-    public Reactivo(String descripcion, String cantidad) {
+    public Reactivo(String descripcion, double cantidad) {
         this.descripcion = descripcion;
         this.cantidad = cantidad;
     }
@@ -29,10 +30,10 @@ public class Reactivo {
     }
 
     public String getCantidad() {
-        return cantidad;
+        return String.valueOf(cantidad);
     }
 
-    public void setCantidad(String cantidad) {
+    public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
     
