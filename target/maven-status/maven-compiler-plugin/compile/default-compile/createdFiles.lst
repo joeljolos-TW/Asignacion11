@@ -1,0 +1,8 @@
+InterfazGrafica\FrmLaboratorio.class
+control\Control.class
+Validadores\Validadores.class
+InterfazGrafica\DlgReactivo.class
+Modelo\Reactivo.class
+InterfazGrafica\DlgProducto.class
+Modelo\Producto.class
+Main\Main.class
