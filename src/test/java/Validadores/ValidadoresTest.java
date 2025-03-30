@@ -76,6 +76,7 @@ public class ValidadoresTest {
         assertFalse(val.validaDescripcionReactivo("Disfruta de una experiencia auditiva inmersiva con estos auriculares inalámbricos de alta fidelidad, con cancelación de ruido activa, batería de larga duración y un diseño ergonómico para máxima comodidad durante horas."));
     }
 
+    
 }
     
 

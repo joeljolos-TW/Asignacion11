@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import Validadores.Validadores;
+import control.Control;
 /**
  *
  * @author joel_
@@ -35,6 +36,7 @@ public class DlgReactivo extends JDialog {
     private final JButton btnCancelar = new JButton("Cancelar");
 
     private final Validadores vd = new Validadores();
+    
 
     // Constructor mejorado
     public DlgReactivo(JFrame parent, char opcion) {
@@ -107,18 +109,16 @@ public class DlgReactivo extends JDialog {
 
         if (opcion == 'i') {
             // Acción para el botón Aceptar
-            btnAceptar.addActionListener(e -> {
-                if (vd.validaDescripcionReactivo(getDescripcion())
-                        && vd.validaCantidadReactivo(String.valueOf(getCantidad()))) {
+            btnAceptar.addActionListener(e -> {Control control = new Control();
+                    control.inventariaReactivo(this);
                     dispose(); // Cierra el diálogo si los datos son válidos
-                }
+                
             });
         } else if (opcion == 'd') {
-            btnAceptar.addActionListener(e -> {
-                if(vd.validaDescripcionReactivo(getDescripcion())
-                        && vd.validaCantidadReactivo(String.valueOf(getCantidad()))){
-                    dispose();
-                }
+            btnAceptar.addActionListener(e -> {Control control = new Control();
+                control.desinventariaReactivo(this);
+                dispose();
+                
             });
         }
 
@@ -134,37 +134,9 @@ public class DlgReactivo extends JDialog {
 
     }
 
-    private boolean validarDatos() {
-        // Validar que la cantidad sea un número positivo
-        try {
-            double cantidad = Double.parseDouble(txtCantidad.getText());
-            if (cantidad <= 0) {
-                JOptionPane.showMessageDialog(this,
-                        "La cantidad debe ser un número positivo",
-                        "Error", JOptionPane.ERROR_MESSAGE);
-                return false;
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this,
-                    "La cantidad debe ser un número válido",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        // Validar que la descripción no esté vacía
-        if (txtDescripcion.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this,
-                    "La descripción no puede estar vacía",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        return true;
-    }
-
     // Métodos para acceder a los datos
-    public double getCantidad() {
-        return Double.parseDouble(txtCantidad.getText());
+    public String getCantidad() {
+        return txtCantidad.getText();
     }
 
     public String getDescripcion() {

@@ -13,6 +13,7 @@ package InterfazGrafica;
 import javax.swing.*;
 import java.awt.*;
 import Validadores.Validadores;
+import control.Control;
 
 public class DlgProducto extends JDialog {
     
@@ -30,8 +31,12 @@ public class DlgProducto extends JDialog {
     
     private final Validadores vd = new Validadores();
     
+    private final JFrame parentFrame;
+    
     public DlgProducto(JFrame parent) {
         super(parent, "Gestión de Producto", true);
+        
+        parentFrame= parent;
         initComponents();
         setupListeners();
         setupLayout();
@@ -100,13 +105,11 @@ public class DlgProducto extends JDialog {
     }
     
     private void setupListeners() {
-        btnAceptar.addActionListener(e -> {
-            if (vd.validaClaveProducto(getClave())&&
-                    vd.validaNombreProducto(getNombre())&&
-                    vd.validaUnidadProducto(getUnidad())) {
-                
-            }
-        });
+        btnAceptar.addActionListener(e -> {Control control = new Control();
+            control.agregaProducto(this);
+            dispose();
+        }
+        );
         
         btnRestaurar.addActionListener(e->{
             setClave("");

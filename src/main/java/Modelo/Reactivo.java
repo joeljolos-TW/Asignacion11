@@ -3,22 +3,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Modelo;
+
 import Validadores.Validadores;
+
 /**
  *
  * @author joel_
  */
 public class Reactivo {
+
     private String descripcion;
-    private double cantidad;
-    private Validadores vd;
+    private String cantidad;
+    private final Validadores vd;
 
     public Reactivo() {
+        vd = new Validadores();
     }
 
-    public Reactivo(String descripcion, double cantidad) {
+    public Reactivo(String descripcion, String cantidad) {
         this.descripcion = descripcion;
         this.cantidad = cantidad;
+        vd = new Validadores();
     }
 
     public String getDescripcion() {
@@ -30,17 +35,16 @@ public class Reactivo {
     }
 
     public String getCantidad() {
-        return String.valueOf(cantidad);
+        return cantidad;
     }
 
-    public void setCantidad(double cantidad) {
+    public void setCantidad(String cantidad) {
         this.cantidad = cantidad;
     }
-    
-    public boolean validarReactivo(){
-        vd= new Validadores();
-        
+
+    public boolean validarReactivo() {
+
         return vd.validaDescripcionReactivo(this.getDescripcion())
-                &&vd.validaCantidadReactivo(this.getCantidad());
+                && vd.validaCantidadReactivo(this.getCantidad());
     }
 }
